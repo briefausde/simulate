@@ -77,5 +77,6 @@ if __name__ == "__main__":
 
     for i in range(1, num_of_servers):
         print("Server {} has data {}".format(i, data[i]))
+    print("\n")
 
     check_lost_shards(data)
