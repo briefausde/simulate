@@ -53,7 +53,7 @@ def generate_mirror_servers(n):
     return [[shard for shard in range((server*5)-4, (server*5)+1)] for server in range(1, servers_num+1)]*2
 
 
-def check_lost_shards(num_of_servers, storage):
+def check_lost_shards(storage):
     servers = dict(zip(range(1, num_of_servers+1), storage))
 
     for server, shards in servers.items():
@@ -71,9 +71,11 @@ if __name__ == "__main__":
     num_of_servers, generate_mode = get_data()
 
     if generate_mode:
-        servers = generate_mirror_servers(num_of_servers)
+        data = generate_mirror_servers(num_of_servers)
     else:
-        servers = generate_random_servers(num_of_servers)
+        data = generate_random_servers(num_of_servers)
 
-    print(servers)
-    check_lost_shards(num_of_servers, servers)
+    for i in range(1, num_of_servers):
+        print("Server {} has data {}".format(i, data[i]))
+
+    check_lost_shards(data)
